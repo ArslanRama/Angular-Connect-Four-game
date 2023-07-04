@@ -1,0 +1,35 @@
+.grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .disc {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: auto;
+  }
+  
+  .red {
+    background-color: red;
+  }
+  
+  .yellow {
+    background-color: yellow;
+  }
+  
