@@ -16,6 +16,8 @@ export class GameComponent {
   readonly columns = 7;
   currentPlayer: Player = Player.Red;
   grid: Player[][] = [];
+  isGameOver = false;
+  winner: Player | null = null;
 
   constructor() {
     this.resetGrid();
@@ -26,13 +28,20 @@ export class GameComponent {
     for (let row = 0; row < this.rows; row++) {
       this.grid[row] = Array(this.columns).fill(Player.None);
     }
+    this.isGameOver = false;
+    this.winner = null;
   }
 
   dropDisc(column: number): void {
+    if (this.isGameOver) {
+      return;
+    }
+
     for (let row = this.rows - 1; row >= 0; row--) {
       if (this.grid[row][column] === Player.None) {
         this.grid[row][column] = this.currentPlayer;
         this.checkForWin(row, column);
+        this.checkForDraw();
         this.togglePlayer();
         return;
       }
@@ -46,9 +55,8 @@ export class GameComponent {
       this.checkWinDirection(row, column, 1, 1) || // Diagonal (top-left to bottom-right)
       this.checkWinDirection(row, column, 1, -1)   // Diagonal (top-right to bottom-left)
     ) {
-      const winner = this.currentPlayer === Player.Red ? 'Red' : 'Yellow';
-      alert(`Player ${winner} wins!`);
-      this.resetGrid();
+      this.isGameOver = true;
+      this.winner = this.currentPlayer;
     }
   }
 
@@ -76,8 +84,20 @@ export class GameComponent {
     return count >= 4;
   }
 
+  checkForDraw(): void {
+    const isGridFull = this.grid.every(row => row.every(cell => cell !== Player.None));
+    if (isGridFull) {
+      this.isGameOver = true;
+      this.winner = null;
+    }
+  }
+
   togglePlayer(): void {
     this.currentPlayer =
       this.currentPlayer === Player.Red ? Player.Yellow : Player.Red;
+  }
+
+  getPlayerColorName(player: Player): string {
+    return player === Player.Red ? 'Red' : 'Yellow';
   }
 }
