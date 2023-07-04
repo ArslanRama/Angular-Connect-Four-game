@@ -3,19 +3,25 @@
 </div>
 
 <div class="grid">
+  <!-- Iterate over each row in the grid -->
   <div class="row" *ngFor="let row of grid">
+    <!-- Iterate over each cell in the row -->
     <div class="cell" *ngFor="let cell of row; let colIndex = index" (click)="dropDisc(colIndex)">
+      <!-- Display the disc in the cell based on the cell value -->
       <div class="disc" [ngClass]="{'red': cell === 1, 'yellow': cell === 2}"></div>
     </div>
   </div>
 </div>
 
 <div class="game-message" *ngIf="isGameOver">
+  <!-- Display the winning player's color name if there is a winner -->
   <p *ngIf="winner !== null">
     Player {{ getPlayerColorName(winner) }} wins!
   </p>
+  <!-- Display a message for a draw game -->
   <p *ngIf="winner === null">
     It's a draw!
   </p>
+  <!-- Button to restart the game -->
   <button class="restart-button" (click)="resetGrid()">Play Again</button>
 </div>

@@ -22,7 +22,7 @@ export class GameComponent {
   winSound = new Audio('assets/win-sound.wav');
 
   constructor() {
-    this.resetGrid();
+    this.resetGrid(); // Initialize the grid when the component is created
   }
 
   resetGrid(): void {
@@ -41,11 +41,11 @@ export class GameComponent {
 
     for (let row = this.rows - 1; row >= 0; row--) {
       if (this.grid[row][column] === Player.None) {
-        this.grid[row][column] = this.currentPlayer;
-        this.clickSound.play();
-        this.checkForWin(row, column);
-        this.checkForDraw();
-        this.togglePlayer();
+        this.grid[row][column] = this.currentPlayer; // Drop the disc in the selected column
+        this.clickSound.play(); // Play a click sound when a disc is dropped
+        this.checkForWin(row, column); // Check if the current player wins
+        this.checkForDraw(); // Check if the game ends in a draw
+        this.togglePlayer(); // Toggle the current player for the next turn
         return;
       }
     }
@@ -53,14 +53,14 @@ export class GameComponent {
 
   checkForWin(row: number, column: number): void {
     if (
-      this.checkWinDirection(row, column, 1, 0) || // Horizontal
-      this.checkWinDirection(row, column, 0, 1) || // Vertical
-      this.checkWinDirection(row, column, 1, 1) || // Diagonal (top-left to bottom-right)
-      this.checkWinDirection(row, column, 1, -1)   // Diagonal (top-right to bottom-left)
+      this.checkWinDirection(row, column, 1, 0) || // Check for a win in the horizontal direction
+      this.checkWinDirection(row, column, 0, 1) || // Check for a win in the vertical direction
+      this.checkWinDirection(row, column, 1, 1) || // Check for a win in the diagonal (top-left to bottom-right) direction
+      this.checkWinDirection(row, column, 1, -1)   // Check for a win in the diagonal (top-right to bottom-left) direction
     ) {
       this.isGameOver = true;
-      this.winner = this.currentPlayer;
-      this.winSound.play();
+      this.winner = this.currentPlayer; // Set the winner
+      this.winSound.play(); // Play a win sound
     }
   }
 
@@ -70,6 +70,7 @@ export class GameComponent {
     let r = row;
     let c = column;
 
+    // Check for consecutive discs in the specified direction
     while (r >= 0 && r < this.rows && c >= 0 && c < this.columns && this.grid[r][c] === player) {
       count++;
       r += rowIncrement;
@@ -79,13 +80,14 @@ export class GameComponent {
     r = row - rowIncrement;
     c = column - colIncrement;
 
+    // Check for consecutive discs in the opposite direction
     while (r >= 0 && r < this.rows && c >= 0 && c < this.columns && this.grid[r][c] === player) {
       count++;
       r -= rowIncrement;
       c -= colIncrement;
     }
 
-    return count >= 4;
+    return count >= 4; // Return true if there are at least four consecutive discs
   }
 
   checkForDraw(): void {
@@ -98,10 +100,10 @@ export class GameComponent {
 
   togglePlayer(): void {
     this.currentPlayer =
-      this.currentPlayer === Player.Red ? Player.Yellow : Player.Red;
+      this.currentPlayer === Player.Red ? Player.Yellow : Player.Red; // Switch the current player between Red and Yellow
   }
 
   getPlayerColorName(player: Player): string {
-    return player === Player.Red ? 'Red' : 'Yellow';
+    return player === Player.Red ? 'Red' : 'Yellow'; // Return the color name of the player
   }
 }
