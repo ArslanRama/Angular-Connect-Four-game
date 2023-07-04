@@ -1,1 +1,19 @@
-<p>game-board works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Board</title>
+</head>
+<body>
+  <div class="game-board">
+    <div class="grid">
+      <div *ngFor="let row of gameBoard; let i = index" class="row">
+        <div *ngFor="let cell of row; let j = index" class="cell" (click)="placeGamePiece(j)">
+          <div [ngClass]="getPieceClass(cell)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
