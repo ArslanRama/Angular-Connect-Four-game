@@ -18,6 +18,8 @@ export class GameComponent {
   grid: Player[][] = [];
   isGameOver = false;
   winner: Player | null = null;
+  clickSound = new Audio('assets/click-sound.flac');
+  winSound = new Audio('assets/win-sound.wav');
 
   constructor() {
     this.resetGrid();
@@ -40,6 +42,7 @@ export class GameComponent {
     for (let row = this.rows - 1; row >= 0; row--) {
       if (this.grid[row][column] === Player.None) {
         this.grid[row][column] = this.currentPlayer;
+        this.clickSound.play();
         this.checkForWin(row, column);
         this.checkForDraw();
         this.togglePlayer();
@@ -57,6 +60,7 @@ export class GameComponent {
     ) {
       this.isGameOver = true;
       this.winner = this.currentPlayer;
+      this.winSound.play();
     }
   }
 
