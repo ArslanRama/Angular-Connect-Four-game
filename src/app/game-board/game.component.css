@@ -1,8 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+.title-container {
+  margin-bottom: 40px; /* Adjust the margin as needed */
+}
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  color: #e74c3c; /* Red color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .grid {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  border-radius: 10px; /* Rounded corners */
 }
 
 .row {
@@ -10,19 +28,21 @@
 }
 
 .cell {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
+  margin: 5px; /* Adjust the margin as needed */
   border: 1px solid #000;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  border-radius: 50%; /* Add border-radius for circles */
 }
 
 .disc {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   margin: auto;
   transition: background-color 0.3s ease-in-out;
@@ -30,27 +50,30 @@
 
 .red {
   background-color: #e74c3c;
+  box-shadow: 0px 4px 10px rgba(231, 76, 60, 0.5);
 }
 
 .yellow {
   background-color: #f1c40f;
+  box-shadow: 0px 4px 10px rgba(241, 196, 15, 0.5);
 }
 
 .game-message {
-  margin-top: 20px;
-  font-size: 24px;
+  margin-top: 40px;
+  font-size: 32px;
   text-align: center;
+  color: #333;
 }
 
 .restart-button {
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
+  margin-top: 30px;
+  padding: 12px 24px;
   background-color: #3498db;
   color: #fff;
   border: none;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
@@ -59,9 +82,9 @@
   background-color: #2980b9;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .grid {
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   .cell {
@@ -70,17 +93,17 @@
   }
 
   .disc {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
 
   .game-message {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .restart-button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    font-size: 14px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
   }
 }
